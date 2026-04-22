@@ -33,6 +33,7 @@ section[data-testid="stSidebar"] {
 /* Ocultar header de Streamlit */
 header[data-testid="stHeader"] { background: transparent; }
 #MainMenu, footer { visibility: hidden; }
+button[data-testid="collapsedControl"] { display: none !important; }
 
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
@@ -195,13 +196,13 @@ with st.sidebar:
         st.markdown("""
         <div style="text-align:center; padding: 20px 0 10px;">
             <div style="font-family:'Space Mono',monospace; font-size:17px; font-weight:700; color:#e0e0e0; line-height:1.3;">
-                Jenifer<br>Gonzalez
+                Jenifer Gonzalez
             </div>
             <div style="font-size:11px; color:#8b949e; margin-top:6px; font-family:'Inter',sans-serif;">
                 QA Automation
             </div>
             <div style="font-size:11px; color:#58a6ff; font-family:'Inter',sans-serif;">
-                &#8594; Data Science
+                &rarr; Data Science
             </div>
         </div>
         """, unsafe_allow_html=True)
