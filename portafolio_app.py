@@ -31,11 +31,22 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar header de Streamlit */
+header[data-testid="stHeader"] { background: transparent; }
 #MainMenu, footer { visibility: hidden; }
-button[data-testid="collapsedControl"] span { display: none !important; }
-button[data-testid="collapsedControl"] { min-width: 24px !important; width: 24px !important; }
 
-            
+/* Ocultar SOLO el texto del botón colapsar sidebar — mantiene el botón funcional */
+button[data-testid="collapsedControl"] span,
+button[data-testid="collapsedControl"] p,
+section[data-testid="stSidebarCollapsedControl"] span,
+section[data-testid="stSidebarCollapsedControl"] p {
+    display: none !important;
+    visibility: hidden !important;
+    font-size: 0 !important;
+    width: 0 !important;
+    height: 0 !important;
+}
+
+			
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
 p, li, span { font-family: 'Inter', sans-serif !important; }
@@ -283,7 +294,7 @@ def page_home():
             Jenifer Gonzalez
         </h1>
         <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:#8b949e; margin: 12px 0 24px;">
-            QA Automation Engineer &nbsp;→&nbsp; Data Scientist
+            QA Automation Engineer &nbsp;&rarr;&nbsp; Data Scientist
         </div>
         <p style="max-width:600px; margin:0 auto; color:#8b949e; font-size:15px; line-height:1.7;">
             Ingeniera de Sistemas con experiencia en aseguramiento de calidad y metodologías ágiles,
@@ -370,7 +381,7 @@ def page_qa_world():
         <span class="world-tag-qa">🧪 QA AUTOMATION</span>
         <h2 style="margin:12px 0 4px;">Ecosistema de Automatización</h2>
         <p style="color:#8b949e; font-size:14px;">
-            Tres proyectos diseñados para trabajar juntos: framework base → análisis de datos → CI/CD automático.
+            Tres proyectos diseñados para trabajar juntos: framework base &rarr; análisis de datos &rarr; CI/CD automático.
         </p>
     </div>
     """, unsafe_allow_html=True)
@@ -436,6 +447,7 @@ def page_qa_world():
                 y=success_rates,
                 marker_color=["#22c55e" if r == 100 else "#f97316" if r <
                               92 else "#3b82f6" for r in success_rates],
+
                 name="Tasa de éxito %",
                 text=[f"{r}%" for r in success_rates],
                 textposition="outside"
@@ -503,6 +515,7 @@ def page_qa_world():
             fig = go.Figure()
             fig.add_trace(go.Bar(name="✅ Passed", x=endpoints,
                           y=passed, marker_color="#22c55e"))
+
             fig.add_trace(go.Bar(name="❌ Failed", x=endpoints,
                           y=failed, marker_color="#ef4444"))
 
@@ -595,13 +608,13 @@ def page_qa_world():
         </div>
         <div style="display:flex; align-items:center; gap:12px; font-size:13px; color:#8b949e; flex-wrap:wrap;">
             <span>🔌 API Testing Framework</span>
-            <span style="color:#f97316;">→</span>
+            <span style="color:#f97316;">&rarr;</span>
             <span>📊 QA Dashboard</span>
-            <span style="color:#f97316;">→</span>
+            <span style="color:#f97316;">&rarr;</span>
             <span>🔄 CI/CD Pipeline</span>
         </div>
         <div style="font-size:12px; color:#8b949e; margin-top:8px;">
-            Base: estructura y cliente HTTP &nbsp;→&nbsp; Análisis: métricas y visualización &nbsp;→&nbsp; Automatización: corre solo en cada push
+            Base: estructura y cliente HTTP &nbsp;&rarr;&nbsp; Análisis: métricas y visualización &nbsp;&rarr;&nbsp; Automatización: corre solo en cada push
         </div>
     </div>
     """, unsafe_allow_html=True)
@@ -667,21 +680,26 @@ def page_ds_world():
                            use_container_width=True)
 
         with col2:
+
             st.markdown(
                 "**Demo interactiva: Simula predicción de recuperación**")
 
             with st.form("gold_form"):
+
                 reagent_floatation = st.slider(
                     "Reactivo flotación (xanthate)", 1.0, 15.0, 7.5, 0.1)
+
                 pulp_density = st.slider(
                     "Densidad del pulp (%)", 20.0, 60.0, 40.0, 0.5)
                 air_feed = st.slider("Alimentación de aire",
                                      500.0, 1500.0, 900.0, 10.0)
+
                 submitted = st.form_submit_button(
                     "🔮 Predecir recuperación", use_container_width=True)
 
             if submitted:
                 # Simulación representativa
+
                 pred = 65 + (reagent_floatation - 7.5) * 2.1 + \
                     (pulp_density - 40) * 0.3 + (air_feed - 900) * 0.01
                 pred = max(40, min(95, pred))
@@ -822,12 +840,16 @@ def page_ds_world():
 
             with st.form("churn_form"):
                 antiguedad = st.slider("Meses como cliente", 1, 72, 12)
+
                 llamadas_soporte = st.slider(
                     "Llamadas a soporte (último mes)", 0, 10, 2)
+
                 cargo_mensual = st.slider(
                     "Cargo mensual (USD)", 20.0, 120.0, 65.0, 0.5)
+
                 tiene_contrato = st.radio(
                     "Tipo de contrato", ["Mensual", "1 año", "2 años"], horizontal=True)
+
                 pred_churn = st.form_submit_button(
                     "⚠️ Analizar riesgo", use_container_width=True)
 
@@ -875,13 +897,13 @@ def page_about():
                 Jenifer Gonzalez
             </div>
             <div style="font-size:12px; color:#8b949e; margin-bottom:16px;">
-                Colombia
+                Bogotá, Colombia
             </div>
             <div style="font-size:13px; color:#8b949e; line-height:1.8;">
                 Ingeniera de Sistemas<br>
                 QA Automation Engineer<br>
                 Scrum Master<br>
-                Data Scientist
+                Data Scientist en formación
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -891,7 +913,7 @@ def page_about():
         habilidades = ["Pensamiento analítico", "Orientada a calidad", "Trabajo en equipo ágil",
                        "Comunicación técnica", "Mentalidad de mejora continua", "Resolución de problemas"]
         for h in habilidades:
-            st.markdown(f"<div style='font-size:13px; color:#8b949e; padding:4px 0;'>→ {h}</div>",
+            st.markdown(f"<div style='font-size:13px; color:#8b949e; padding:4px 0;'>&rarr; {h}</div>",
                         unsafe_allow_html=True)
 
     with col2:
@@ -931,7 +953,7 @@ def page_about():
             Ciencia de Datos. Me interesa especialmente cualquier posición donde los datos
             confiables y los procesos de calidad sean parte del mismo flujo de trabajo.
             <br><br>
-            <span style="color:#3b82f6;">Data Science · Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
+            <span style="color:#3b82f6;">Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
         </div>
         """, unsafe_allow_html=True)
 
