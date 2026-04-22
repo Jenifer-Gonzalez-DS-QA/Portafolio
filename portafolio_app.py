@@ -29,20 +29,10 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #21262d;
 }
 
-/* Ocultar header de Streamlit */
-header[data-testid="stHeader"] { background: transparent; }
-#MainMenu, footer { visibility: hidden; }
-
-/* Ocultar botón nativo de colapsar sidebar */
-button[data-testid="collapsedControl"],
-										 
-section[data-testid="stSidebarCollapsedControl"] {
-													
+/* Ocultar botón nativo de colapsar sidebar */			  
+<style>
+[data-testid="stIconMaterial"] {
     display: none !important;
-								  
-							
-						
-						 
 }
 
 /* Tipografía */
@@ -194,19 +184,6 @@ def load_cv():
                 return f.read()
     return None
 
-# ─── BOTÓN PROPIO ABRIR/CERRAR SIDEBAR ─────────────────────────────────────────
-# CSS para ocultar la flecha en los expanders
-st.markdown("""
-    <style>
-    /* Ocultar el icono de doble flecha */
-    .st-emotion-cache-154pgm8 svg {
-        display: none;
-    }
-    </style>
-    """, unsafe_allow_html=True)
-
-with st.expander("Ver más"):
-    st.write("Contenido oculto")
 # ─── SIDEBAR ────────────────────────────────────────────────────────────────────
 with st.sidebar:
 
