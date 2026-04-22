@@ -32,8 +32,10 @@ section[data-testid="stSidebar"] {
 
 /* Ocultar header de Streamlit */
 #MainMenu, footer { visibility: hidden; }
-button[data-testid="collapsedControl"] { display: none !important; }
+button[data-testid="collapsedControl"] span { display: none !important; }
+button[data-testid="collapsedControl"] { min-width: 24px !important; width: 24px !important; }
 
+            
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
 p, li, span { font-family: 'Inter', sans-serif !important; }
