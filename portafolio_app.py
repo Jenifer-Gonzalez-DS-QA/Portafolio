@@ -30,17 +30,17 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-        [data-testid="stSidebarCollapse"] svg {
-            display: none;
-        }
-        /* Añadir texto personalizado "Abrir/Cerrar" */
-        [data-testid="stSidebarCollapse"]::after {
-            content: 'Abrir/Cerrar';
-            font-size: 14px;
-            font-weight: bold;
-            color: #31333F;
-            white-space: nowrap;
-        }
+/* Localiza el botón del sidebar y cambia el contenido */
+    [data-testid="stSidebarCollapseButton"] div div::after {
+        content: " Cerrar"; /* Aquí pones el texto que quieras */
+        font-size: 14px;
+        color: grey;
+    }
+    
+    /* Opcional: Ocultar el icono original si se ve como texto */
+    [data-testid="stSidebarCollapseButton"] span {
+        display: none;
+    }
 
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
