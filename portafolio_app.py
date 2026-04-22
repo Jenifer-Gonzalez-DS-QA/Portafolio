@@ -30,16 +30,23 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-/* Localiza el botón del sidebar y cambia el contenido */
-    [data-testid="stSidebarCollapseButton"] div div::after {
-        content: " Cerrar"; /* Aquí pones el texto que quieras */
-        font-size: 14px;
-        color: grey;
-    }
-    
-    /* Opcional: Ocultar el icono original si se ve como texto */
+/* 1. Cuando la barra está ABIERTA (botón para cerrar) */
     [data-testid="stSidebarCollapseButton"] span {
-        display: none;
+        display: none; /* Esconde el texto 'keyboard_double_arrow_left' */
+    }
+    [data-testid="stSidebarCollapseButton"]::after {
+        content: "◀"; /* Puedes usar un símbolo simple o texto como "Cerrar" */
+        font-size: 18px;
+    }
+
+    /* 2. Cuando la barra está CERRADA (botón para abrir) */
+    [data-testid="collapsedControl"] span {
+        display: none; /* Esconde el texto 'keyboard_double_arrow_right' */
+    }
+    [data-testid="collapsedControl"]::after {
+        content: "▶"; /* Símbolo para reabrir */
+        font-size: 18px;
+        padding-left: 10px;
     }
 
 /* Tipografía */
@@ -874,7 +881,7 @@ def page_about():
                 Ingeniera de Sistemas<br>
                 QA Automation Engineer<br>
                 Scrum Master<br>
-                Data Scientist en formación
+                Data Scientist
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -924,7 +931,7 @@ def page_about():
             Ciencia de Datos. Me interesa especialmente cualquier posición donde los datos
             confiables y los procesos de calidad sean parte del mismo flujo de trabajo.
             <br><br>
-            <span style="color:#3b82f6;">Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
+            <span style="color:#3b82f6;">Data Science · Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
         </div>
         """, unsafe_allow_html=True)
 
