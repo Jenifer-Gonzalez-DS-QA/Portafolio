@@ -1,3 +1,4 @@
+import os
 import streamlit as st
 import pandas as pd
 import plotly.express as px
@@ -6,7 +7,7 @@ import numpy as np
 
 # ─── CONFIG ────────────────────────────────────────────────────────────────────
 st.set_page_config(
-    page_title="Jenifer González | Portfolio",
+    page_title="Jenifer Gonzalez | Portfolio",
     page_icon="🚀",
     layout="wide",
     initial_sidebar_state="expanded"
@@ -161,27 +162,63 @@ p, li, span { font-family: 'Inter', sans-serif !important; }
 if "page" not in st.session_state:
     st.session_state.page = "home"
 
+# ─── HELPERS ────────────────────────────────────────────────────────────────────
+
+
+def load_banner():
+    """Carga el banner si existe en el repo."""
+    for name in ["banner.png", "banner.jpg", "assets/banner.png", "assets/banner.jpg"]:
+        if os.path.exists(name):
+            return name
+    return None
+
+
+def load_cv():
+    """Carga el CV si existe en el repo."""
+    for name in ["cv.pdf", "CV.pdf", "assets/cv.pdf", "assets/CV.pdf",
+                 "Jenifer_Gonzalez_CV.pdf", "jenifer_gonzalez_cv.pdf"]:
+        if os.path.exists(name):
+            with open(name, "rb") as f:
+                return f.read()
+    return None
+
+
 # ─── SIDEBAR ────────────────────────────────────────────────────────────────────
 with st.sidebar:
-    st.markdown("""
-    <div style="text-align:center; padding: 20px 0 10px;">
-        <div style="font-family:'Space Mono',monospace; font-size:18px; font-weight:700; color:#e0e0e0;">
-            Jenifer González
+
+    # Banner (opcional — si existe el archivo en el repo)
+    banner_path = load_banner()
+    if banner_path:
+        st.image(banner_path, use_container_width=True)
+    else:
+        # Fallback: header de texto cuando no hay banner
+        st.markdown("""
+        <div style="text-align:center; padding: 20px 0 10px;">
+            <div style="font-family:'Space Mono',monospace; font-size:17px; font-weight:700; color:#e0e0e0; line-height:1.3;">
+                Jenifer<br>Gonzalez
+            </div>
+            <div style="font-size:11px; color:#8b949e; margin-top:6px; font-family:'Inter',sans-serif;">
+                QA Automation
+            </div>
+            <div style="font-size:11px; color:#58a6ff; font-family:'Inter',sans-serif;">
+                &#8594; Data Science
+            </div>
         </div>
-        <div style="font-size:11px; color:#8b949e; margin-top:4px;">
-            QA Automation → Data Science
-        </div>
-    </div>
-    """, unsafe_allow_html=True)
+        """, unsafe_allow_html=True)
 
     st.divider()
-    st.markdown("<p style='font-size:10px; color:#8b949e; text-transform:uppercase; letter-spacing:2px; padding: 4px 0;'>Navegación</p>", unsafe_allow_html=True)
+    st.markdown(
+        "<p style='font-size:10px; color:#8b949e; text-transform:uppercase;"
+        " letter-spacing:2px; padding: 4px 0; font-family:Space Mono,monospace;'>"
+        "Navegación</p>",
+        unsafe_allow_html=True
+    )
 
     pages = {
-        "home": "🏠  Inicio",
+        "home":     "🏠  Inicio",
         "qa_world": "🧪  Mundo QA",
         "ds_world": "📊  Mundo Data Science",
-        "about": "👩‍💻  Sobre mí",
+        "about":    "👩‍💻  Sobre mi",
     }
 
     for key, label in pages.items():
@@ -196,22 +233,41 @@ with st.sidebar:
             st.rerun()
 
     st.divider()
+
+    # Links
     st.markdown("""
-    <div style="font-size:11px; color:#8b949e; padding: 8px 0;">
-        <div style="margin-bottom:8px;">🔗 <a href="https://www.linkedin.com/in/jenifer-paola-gonzalez-peñuela/" style="color:#58a6ff; text-decoration:none;">LinkedIn</a></div>
-        <div style="margin-bottom:8px;">🐙 <a href="https://github.com/Jenifer-Gonzalez-DS-QA" style="color:#58a6ff; text-decoration:none;">GitHub</a></div>
+    <div style="font-size:12px; color:#8b949e; padding: 6px 0; font-family:'Inter',sans-serif;">
+        <div style="margin-bottom:8px;">
+            🔗 <a href="https://www.linkedin.com/in/jenifer-paola-gonzalez-pe%C3%B1uela/"
+                  target="_blank" style="color:#58a6ff; text-decoration:none;">LinkedIn</a>
+        </div>
+        <div>
+            🐙 <a href="https://github.com/Jenifer-Gonzalez-DS-QA"
+                  target="_blank" style="color:#58a6ff; text-decoration:none;">GitHub</a>
+        </div>
     </div>
     """, unsafe_allow_html=True)
 
-    st.markdown("""
-    <div style="margin-top:auto; padding-top:20px;">
-        <a href="#" style="text-decoration:none;">
-            <div style="background:#21262d; border:1px solid #30363d; border-radius:8px; padding:10px; text-align:center; font-family:'Space Mono',monospace; font-size:12px; color:#e0e0e0;">
-                📄 Descargar CV
-            </div>
-        </a>
-    </div>
-    """, unsafe_allow_html=True)
+    st.markdown("<br>", unsafe_allow_html=True)
+
+    # Botón CV — funcional si el archivo existe, placeholder si no
+    cv_bytes = load_cv()
+    if cv_bytes:
+        st.download_button(
+            label="📄  Descargar CV",
+            data=cv_bytes,
+            file_name="Jenifer_Gonzalez_CV.pdf",
+            mime="application/pdf",
+            use_container_width=True
+        )
+    else:
+        st.markdown("""
+        <div style="background:#21262d; border:1px dashed #30363d; border-radius:8px;
+                    padding:10px; text-align:center; font-size:12px; color:#8b949e;
+                    font-family:'Space Mono',monospace;">
+            📄 CV — próximamente
+        </div>
+        """, unsafe_allow_html=True)
 
 
 # ─── PÁGINA: HOME ───────────────────────────────────────────────────────────────
@@ -222,7 +278,7 @@ def page_home():
             BIENVENIDO A MI PORTAFOLIO
         </div>
         <h1 style="font-size:3rem; margin:0; background:linear-gradient(90deg, #f97316, #3b82f6); -webkit-background-clip:text; -webkit-text-fill-color:transparent; background-clip:text;">
-            Jenifer González
+            Jenifer Gonzalez
         </h1>
         <div style="font-family:'Space Mono',monospace; font-size:1.1rem; color:#8b949e; margin: 12px 0 24px;">
             QA Automation Engineer &nbsp;→&nbsp; Data Scientist
@@ -376,7 +432,8 @@ def page_qa_world():
             fig.add_trace(go.Bar(
                 x=methods,
                 y=success_rates,
-                marker_color=["#22c55e" if r == 100 else "#f97316" if r < 92 else "#3b82f6" for r in success_rates],
+                marker_color=["#22c55e" if r == 100 else "#f97316" if r <
+                              92 else "#3b82f6" for r in success_rates],
                 name="Tasa de éxito %",
                 text=[f"{r}%" for r in success_rates],
                 textposition="outside"
@@ -442,8 +499,10 @@ def page_qa_world():
             failed = [0, 1, 0, 0, 0, 0, 0, 0]
 
             fig = go.Figure()
-            fig.add_trace(go.Bar(name="✅ Passed", x=endpoints, y=passed, marker_color="#22c55e"))
-            fig.add_trace(go.Bar(name="❌ Failed", x=endpoints, y=failed, marker_color="#ef4444"))
+            fig.add_trace(go.Bar(name="✅ Passed", x=endpoints,
+                          y=passed, marker_color="#22c55e"))
+            fig.add_trace(go.Bar(name="❌ Failed", x=endpoints,
+                          y=failed, marker_color="#ef4444"))
 
             fig.update_layout(
                 barmode="stack",
@@ -606,17 +665,23 @@ def page_ds_world():
                            use_container_width=True)
 
         with col2:
-            st.markdown("**Demo interactiva: Simula predicción de recuperación**")
+            st.markdown(
+                "**Demo interactiva: Simula predicción de recuperación**")
 
             with st.form("gold_form"):
-                reagent_floatation = st.slider("Reactivo flotación (xanthate)", 1.0, 15.0, 7.5, 0.1)
-                pulp_density = st.slider("Densidad del pulp (%)", 20.0, 60.0, 40.0, 0.5)
-                air_feed = st.slider("Alimentación de aire", 500.0, 1500.0, 900.0, 10.0)
-                submitted = st.form_submit_button("🔮 Predecir recuperación", use_container_width=True)
+                reagent_floatation = st.slider(
+                    "Reactivo flotación (xanthate)", 1.0, 15.0, 7.5, 0.1)
+                pulp_density = st.slider(
+                    "Densidad del pulp (%)", 20.0, 60.0, 40.0, 0.5)
+                air_feed = st.slider("Alimentación de aire",
+                                     500.0, 1500.0, 900.0, 10.0)
+                submitted = st.form_submit_button(
+                    "🔮 Predecir recuperación", use_container_width=True)
 
             if submitted:
                 # Simulación representativa
-                pred = 65 + (reagent_floatation - 7.5) * 2.1 + (pulp_density - 40) * 0.3 + (air_feed - 900) * 0.01
+                pred = 65 + (reagent_floatation - 7.5) * 2.1 + \
+                    (pulp_density - 40) * 0.3 + (air_feed - 900) * 0.01
                 pred = max(40, min(95, pred))
                 st.metric("Recuperación estimada (rougher)", f"{pred:.1f}%",
                           f"{'↑ Buena' if pred > 70 else '↓ Optimizar parámetros'}")
@@ -755,10 +820,14 @@ def page_ds_world():
 
             with st.form("churn_form"):
                 antiguedad = st.slider("Meses como cliente", 1, 72, 12)
-                llamadas_soporte = st.slider("Llamadas a soporte (último mes)", 0, 10, 2)
-                cargo_mensual = st.slider("Cargo mensual (USD)", 20.0, 120.0, 65.0, 0.5)
-                tiene_contrato = st.radio("Tipo de contrato", ["Mensual", "1 año", "2 años"], horizontal=True)
-                pred_churn = st.form_submit_button("⚠️ Analizar riesgo", use_container_width=True)
+                llamadas_soporte = st.slider(
+                    "Llamadas a soporte (último mes)", 0, 10, 2)
+                cargo_mensual = st.slider(
+                    "Cargo mensual (USD)", 20.0, 120.0, 65.0, 0.5)
+                tiene_contrato = st.radio(
+                    "Tipo de contrato", ["Mensual", "1 año", "2 años"], horizontal=True)
+                pred_churn = st.form_submit_button(
+                    "⚠️ Analizar riesgo", use_container_width=True)
 
             if pred_churn:
                 # Score simulado representativo
@@ -801,16 +870,16 @@ def page_about():
                 👩‍💻
             </div>
             <div style="font-family:'Space Mono',monospace; font-size:1.2rem; color:#e0e0e0; margin-bottom:6px;">
-                Jenifer González
+                Jenifer Gonzalez
             </div>
             <div style="font-size:12px; color:#8b949e; margin-bottom:16px;">
-                Bogotá, Colombia
+                Colombia
             </div>
             <div style="font-size:13px; color:#8b949e; line-height:1.8;">
                 Ingeniera de Sistemas<br>
                 QA Automation Engineer<br>
                 Scrum Master<br>
-                Data Scientist en formación
+                Data Scientist
             </div>
         </div>
         """, unsafe_allow_html=True)
@@ -860,7 +929,7 @@ def page_about():
             Ciencia de Datos. Me interesa especialmente cualquier posición donde los datos
             confiables y los procesos de calidad sean parte del mismo flujo de trabajo.
             <br><br>
-            <span style="color:#3b82f6;">Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
+            <span style="color:#3b82f6;">Data Science · Data Analyst · Data Engineer · QA Data · Analytics Engineer</span>
         </div>
         """, unsafe_allow_html=True)
 
