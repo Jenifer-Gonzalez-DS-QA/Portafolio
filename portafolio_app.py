@@ -31,7 +31,6 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar header de Streamlit */
-header[data-testid="stHeader"] { background: transparent; }
 #MainMenu, footer { visibility: hidden; }
 button[data-testid="collapsedControl"] { display: none !important; }
 
