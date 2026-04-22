@@ -195,17 +195,18 @@ def load_cv():
     return None
 
 # ─── BOTÓN PROPIO ABRIR/CERRAR SIDEBAR ─────────────────────────────────────────
-col_toggle, _ = st.columns([0.08, 0.92])
-with col_toggle:
-    icon = '◀  Cerrar' if st.session_state.sidebar_open else '▶  Menú'
-    if st.button(icon, key='toggle_sidebar', help='Abrir / Cerrar menú'):
-        st.session_state.sidebar_open = not st.session_state.sidebar_open
-        st.rerun()
+# CSS para ocultar la flecha en los expanders
+st.markdown("""
+    <style>
+    /* Ocultar el icono de doble flecha */
+    .st-emotion-cache-154pgm8 svg {
+        display: none;
+    }
+    </style>
+    """, unsafe_allow_html=True)
 
-sidebar_css = 'flex' if st.session_state.sidebar_open else 'none'
-st.markdown(f'<style>section[data-testid="stSidebar"]{{display:{sidebar_css} !important;}}</style>',
-            unsafe_allow_html=True)
-
+with st.expander("Ver más"):
+    st.write("Contenido oculto")
 # ─── SIDEBAR ────────────────────────────────────────────────────────────────────
 with st.sidebar:
 
