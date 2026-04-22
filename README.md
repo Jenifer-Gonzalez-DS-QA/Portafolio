@@ -1,4 +1,4 @@
-# 🚀 Portafolio Interactivo — Jenifer González
+# 🚀 Portafolio Interactivo — Jenifer Gonzalez
 
 > App desplegada en Streamlit Cloud → **[Ver portafolio en vivo](https://TU-LINK.streamlit.app)**
 
@@ -72,7 +72,7 @@ portfolio-streamlit/
 
 ## Autora
 
-**Jenifer González** — QA Automation Engineer → Data Scientist
+**Jenifer Gonzalez** — QA Automation Engineer → Data Scientist
 
 [![LinkedIn](https://img.shields.io/badge/LinkedIn-0A66C2?style=flat-square&logo=linkedin&logoColor=white)](https://www.linkedin.com/in/jenifer-paola-gonzalez-peñuela/)
 [![GitHub](https://img.shields.io/badge/GitHub-181717?style=flat-square&logo=github&logoColor=white)](https://github.com/Jenifer-Gonzalez-DS-QA)
