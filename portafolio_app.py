@@ -30,23 +30,6 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #21262d;
 }
 
-/* Ocultar header de Streamlit */
-header[data-testid="stHeader"] { background: transparent; }
-#MainMenu, footer { visibility: hidden; }
-
-/* Ocultar SOLO el texto del botón colapsar sidebar — mantiene el botón funcional */
-button[data-testid="collapsedControl"] span,
-button[data-testid="collapsedControl"] p,
-section[data-testid="stSidebarCollapsedControl"] span,
-section[data-testid="stSidebarCollapsedControl"] p {
-    display: none !important;
-    visibility: hidden !important;
-    font-size: 0 !important;
-    width: 0 !important;
-    height: 0 !important;
-}
-
-			
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
 p, li, span { font-family: 'Inter', sans-serif !important; }
