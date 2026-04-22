@@ -30,8 +30,17 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-<span color="rgba(135deg, #0a0a0f 0%, #0f1117 50%, #0a0e1a 100%)" data-testid="stIconMaterial" translate="no" class="st-emotion-cache-12bp31y ed4y4ls0">Abrir</span>
-}
+        [data-testid="stSidebarCollapse"] svg {
+            display: none;
+        }
+        /* Añadir texto personalizado "Abrir/Cerrar" */
+        [data-testid="stSidebarCollapse"]::after {
+            content: 'Abrir/Cerrar';
+            font-size: 14px;
+            font-weight: bold;
+            color: #31333F;
+            white-space: nowrap;
+        }
 
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
