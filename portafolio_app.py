@@ -30,9 +30,8 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-<style>
-[data-testid="stIconMaterial"] {
-    display: none !important;
+<span color="rgba(250, 250, 250, 0.6)" data-testid="stIconMaterial" translate="no" class="st-emotion-cache-12bp31y ed4y4ls0">Abrir</span>
+<span color="rgba(250, 250, 250, 0.6)" data-testid="stIconMaterial" translate="no" class="st-emotion-cache-12bp31y ed4y4ls0">Cerrar</span>
 }
 
 /* Tipografía */
