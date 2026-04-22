@@ -30,9 +30,6 @@ section[data-testid="stSidebar"] {
     border-right: 1px solid #21262d;
 }
 
-/* Ocultar header de Streamlit */
-#MainMenu, footer { visibility: hidden; }
-button[data-testid="collapsedControl"] { display: none !important; }
 
 /* Tipografía */
 h1, h2, h3 { font-family: 'Space Mono', monospace !important; }
