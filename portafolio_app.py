@@ -30,23 +30,27 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-/* 1. Cuando la barra está ABIERTA (botón para cerrar) */
-    [data-testid="stSidebarCollapseButton"] span {
-        display: none; /* Esconde el texto 'keyboard_double_arrow_left' */
-    }
-    [data-testid="stSidebarCollapseButton"]::after {
-        content: "◀"; /* Puedes usar un símbolo simple o texto como "Cerrar" */
-        font-size: 18px;
+/* Forzamos la desaparición del texto en AMBOS botones */
+    [data-testid="stSidebarCollapseButton"] div, 
+    [data-testid="collapsedControl"] div {
+        color: transparent !important;
+        font-size: 0px !important;
     }
 
-    /* 2. Cuando la barra está CERRADA (botón para abrir) */
-    [data-testid="collapsedControl"] span {
-        display: none; /* Esconde el texto 'keyboard_double_arrow_right' */
+    /* Añadimos un símbolo visual que no dependa de Google Fonts */
+    [data-testid="stSidebarCollapseButton"]::before {
+        content: "◀";
+        color: black; /* Ajusta según tu tema */
+        font-size: 20px;
+        cursor: pointer;
     }
-    [data-testid="collapsedControl"]::after {
-        content: "▶"; /* Símbolo para reabrir */
-        font-size: 18px;
-        padding-left: 10px;
+
+    [data-testid="collapsedControl"]::before {
+        content: "▶";
+        color: black;
+        font-size: 20px;
+        cursor: pointer;
+        margin-left: 10px;
     }
 
 /* Tipografía */
