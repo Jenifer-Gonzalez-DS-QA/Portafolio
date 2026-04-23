@@ -30,27 +30,8 @@ section[data-testid="stSidebar"] {
 }
 
 /* Ocultar botón nativo de colapsar sidebar */			  
-/* Forzamos la desaparición del texto en AMBOS botones */
-    [data-testid="stSidebarCollapseButton"] div, 
-    [data-testid="collapsedControl"] div {
-        color: transparent !important;
-        font-size: 0px !important;
-    }
-
-    /* Añadimos un símbolo visual que no dependa de Google Fonts */
-    [data-testid="stSidebarCollapseButton"]::before {
-        content: "◀";
-        color: black; /* Ajusta según tu tema */
-        font-size: 20px;
-        cursor: pointer;
-    }
-
-    [data-testid="collapsedControl"]::before {
-        content: "▶";
-        color: black;
-        font-size: 20px;
-        cursor: pointer;
-        margin-left: 10px;
+[data-testid="stSidebarCollapseButton"] {
+        display: none;
     }
 
 /* Tipografía */
